@@ -9,16 +9,17 @@ import PropTypes from "prop-types";
 
 const Grid = styled.div`
   display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-auto-rows: minmax(min-content, 1fr);
+  overflow: hidden;
+  gap: 2rem;
   @media (min-width: 1025px) {
-    grid-gap: 2rem;
     margin: 2rem;
   }
   @media (max-width: 1024px) {
-    grid-gap: 1rem;
     margin: 1rem;
   }
-  justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
 `;
 
 const OuterGrid = styled.div`
@@ -38,6 +39,12 @@ const ShopTitle = styled.h1`
     margin: 1rem;
   }
   padding: 0;
+`;
+
+const FillerDiv = styled.div`
+  background-color: white;
+  width: 100%;
+  grid-column-end: -1;
 `;
 
 function Shop({ shopData, filter, setFilter, cartData, setCartData }) {

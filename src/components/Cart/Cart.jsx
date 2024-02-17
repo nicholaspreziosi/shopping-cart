@@ -56,13 +56,13 @@ const CheckoutBtn = styled.a`
   font-weight: bold;
   padding: 0.5rem;
   margin: 0;
-  color: white;
-  background-color: ${(props) => props.theme.colors.slate};
+  color: ${(props) => props.theme.colors.slate};
+  background-color: white;
   border: 1px solid ${(props) => props.theme.colors.slate};
   cursor: pointer;
   &:hover {
-    background-color: white;
-    color: ${(props) => props.theme.colors.slate};
+    background-color: ${(props) => props.theme.colors.slate};
+    color: white;
   }
   @media (min-width: 1025px) {
     margin: 2rem;

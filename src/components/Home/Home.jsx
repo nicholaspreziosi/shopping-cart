@@ -84,19 +84,19 @@ const Overlay = styled.div`
 `;
 
 function Home({ cartData, setFilter }) {
-  function mensClick() {
+  function mensClick(e) {
     setFilter("men's clothing");
   }
 
-  function womensClick() {
+  function womensClick(e) {
     setFilter("women's clothing");
   }
 
-  function jeweleryClick() {
+  function jeweleryClick(e) {
     setFilter("jewelery");
   }
 
-  function electronicsClick() {
+  function electronicsClick(e) {
     setFilter("electronics");
   }
 
@@ -108,7 +108,7 @@ function Home({ cartData, setFilter }) {
           <ImgContainer>
             <Img src="../../public/male-fashion.jpg" alt="male fashion shot" />
             <Overlay></Overlay>
-            <Link onClick={mensClick} to="/shop">
+            <Link onClick={(e) => mensClick(e)} to="/shop">
               <ShopBtn>Shop Men's</ShopBtn>
             </Link>
             <ImgCredits>
@@ -128,7 +128,7 @@ function Home({ cartData, setFilter }) {
               alt="female fashion shot"
             ></Img>
             <Overlay></Overlay>
-            <Link onClick={womensClick} to="/shop">
+            <Link onClick={(e) => womensClick(e)} to="/shop">
               <ShopBtn>Shop Women's</ShopBtn>
             </Link>
             <ImgCredits>
@@ -148,7 +148,7 @@ function Home({ cartData, setFilter }) {
               alt="female fashion shot"
             ></Img>
             <Overlay></Overlay>
-            <Link onClick={jeweleryClick} to="/shop">
+            <Link onClick={(e) => jeweleryClick(e)} to="/shop">
               <ShopBtn>Shop Jewelery</ShopBtn>
             </Link>
             <ImgCredits>
@@ -168,7 +168,7 @@ function Home({ cartData, setFilter }) {
               alt="female fashion shot"
             ></Img>
             <Overlay></Overlay>
-            <Link onClick={electronicsClick} to="/shop">
+            <Link onClick={(e) => electronicsClick(e)} to="/shop">
               <ShopBtn>Shop Electronics</ShopBtn>
             </Link>
             <ImgCredits>

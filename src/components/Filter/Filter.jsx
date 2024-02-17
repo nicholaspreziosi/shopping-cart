@@ -11,6 +11,7 @@ const Container = styled.div`
   flex-direction: row;
   margin: 1rem;
   gap: 1rem;
+  z-index: 100;
 `;
 
 const Text = styled.p`
