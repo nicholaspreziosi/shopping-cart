@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar.jsx";
 import CartItem from "../CartItem/CartItem.jsx";
 import styled from "styled-components";
-import { useState } from "react";
+import { useMemo } from "react";
 import Theme from "../Theme.jsx";
 import PropTypes from "prop-types";
 
@@ -73,15 +72,13 @@ const CheckoutBtn = styled.a`
 `;
 
 function Cart({ cartData, setCartData }) {
-  function updateTotal(data) {
-    let initialValue = 0;
-    let total = data.reduce(
-      (accumulator, current) => accumulator + current.price * current.quantity,
-      initialValue
+  const totalPrice = useMemo(() => {
+    let total = cartData.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
     );
-
     return (Math.round(total * 100) / 100).toFixed(2);
-  }
+  }, [cartData]);
 
   return (
     <>
@@ -100,7 +97,7 @@ function Cart({ cartData, setCartData }) {
           <CheckoutContainer>
             <CartTotal data-testid="cart-total">
               Total: $
-              {Number.parseFloat(updateTotal(cartData))
+              {Number.parseFloat(totalPrice)
                 .toFixed(2)
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
