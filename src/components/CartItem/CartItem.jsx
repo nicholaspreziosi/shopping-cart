@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar.jsx";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useRef } from "react";
 import Theme from "../Theme.jsx";
 import PropTypes from "prop-types";
 
@@ -120,8 +120,10 @@ const SvgContainer = styled.div`
 `;
 
 function CartItem({ item, cartData, setCartData }) {
+  const inputRef = useRef(null);
+
   function decrementQuantity(id) {
-    const input = document.querySelector(`#cart-quantity${id}`);
+    const input = inputRef.current;
     if (input.value > 1) {
       input.value--;
     }
@@ -129,7 +131,7 @@ function CartItem({ item, cartData, setCartData }) {
   }
 
   function incrementQuantity(id) {
-    const input = document.querySelector(`#cart-quantity${id}`);
+    const input = inputRef.current;
     if (input.value < 9) {
       input.value++;
     }
@@ -137,9 +139,7 @@ function CartItem({ item, cartData, setCartData }) {
   }
 
   function handleChange(id) {
-    let inputValue = Number(
-      document.querySelector(`#cart-quantity${id}`).value
-    );
+    let inputValue = Number(inputRef.current.value);
     let idNum = Number(id);
     let newObj = { ...cartData.find((obj) => obj.id === idNum) };
     newObj.quantity = inputValue;
@@ -167,11 +167,12 @@ function CartItem({ item, cartData, setCartData }) {
               </EditQuantity>
               <CustomQuantity
                 onKeyPress={(event) => {
-                  if (!/[0-9]/.test(event.key)) {
+                  if (!/[1-9]/.test(event.key)) {
                     event.preventDefault();
                   }
                 }}
                 id={"cart-quantity" + item.id}
+                ref={inputRef}
                 data-testid={"cart-quantity-" + item.id}
                 type="tel"
                 min="0"

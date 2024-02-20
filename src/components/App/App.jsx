@@ -1,6 +1,5 @@
 import Router from "../Router/Router.jsx";
 import { useState, useEffect } from "react";
-import Navbar from "../Navbar/Navbar.jsx";
 
 function App() {
   const [filter, setFilter] = useState("all");

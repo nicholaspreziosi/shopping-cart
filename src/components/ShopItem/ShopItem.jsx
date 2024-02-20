@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 import Navbar from "../Navbar/Navbar.jsx";
 import styled from "styled-components";
 import Theme from "../Theme.jsx";
@@ -119,24 +120,24 @@ const EditQuantity = styled.p`
 `;
 
 function ShopItem({ data, cartData, setCartData }) {
-  function decrementQuantity(id) {
-    const input = document.querySelector(`#shop-quantity${id}`);
+  const inputRef = useRef(null);
+
+  function decrementQuantity() {
+    const input = inputRef.current;
     if (input.value > 1) {
       input.value--;
     }
   }
 
-  function incrementQuantity(id) {
-    const input = document.querySelector(`#shop-quantity${id}`);
+  function incrementQuantity() {
+    const input = inputRef.current;
     if (input.value < 9) {
       input.value++;
     }
   }
 
   function handleAdd(id) {
-    let inputValue = Number(
-      document.querySelector(`#shop-quantity${id}`).value
-    );
+    let inputValue = Number(inputRef.current.value);
     let idNum = Number(id);
     if (!inputValue) {
       return;
@@ -144,10 +145,12 @@ function ShopItem({ data, cartData, setCartData }) {
     if (cartData.find((obj) => obj.id === idNum)) {
       let newObj = { ...cartData.find((obj) => obj.id === idNum) };
       newObj.quantity += inputValue;
+      console.log(newObj.quantity);
       setCartData(cartData.map((item) => (item.id === idNum ? newObj : item)));
     } else {
       let newData = { ...data };
       newData.quantity = inputValue;
+      console.log(newData.quantity);
       setCartData([...cartData, newData]);
     }
   }
@@ -175,6 +178,7 @@ function ShopItem({ data, cartData, setCartData }) {
                   }}
                   id={"shop-quantity" + data.id}
                   data-testid={"input-" + data.id}
+                  ref={inputRef}
                   type="tel"
                   min="0"
                   max="100"
